@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1504745726 source:/home/geeheeb/Desktop/playabout/main.cpp
+	<SFML/Graphics.hpp>
+	<iostream>
+	<string>
+
