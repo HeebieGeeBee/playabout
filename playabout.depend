@@ -1,6 +1,35 @@
 # depslib dependency file v1.0
-1504788877 source:/home/geeheeb/Desktop/playabout/main.cpp
+1504816389 source:/home/geeheeb/Desktop/playabout/main.cpp
 	<SFML/Graphics.hpp>
 	<iostream>
 	<string>
+	<cctype>
+	"TileMap.h"
+	"Animation.h"
+	"Character.h"
+
+1504813770 /home/geeheeb/Desktop/playabout/TileMap.h
+	<SFML/Graphics.hpp>
+	<string>
+	<iostream>
+
+1504813969 source:/home/geeheeb/Desktop/playabout/TileMap.cpp
+	"TileMap.h"
+
+1504816056 source:/home/geeheeb/Desktop/playabout/Animation.cpp
+	"Animation.h"
+
+1504814348 /home/geeheeb/Desktop/playabout/Animation.h
+	<SFML/Graphics.hpp>
+	<iostream>
+	<string>
+
+1504816121 source:/home/geeheeb/Desktop/playabout/Character.cpp
+	"Character.h"
+
+1504815799 /home/geeheeb/Desktop/playabout/Character.h
+	<SFML/Graphics.hpp>
+	<iostream>
+	<string>
+	"Animation.h"
 

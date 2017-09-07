@@ -39,7 +39,13 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Animation.cpp" />
+		<Unit filename="Animation.h" />
 		<Unit filename="BODY_male_Epic_armors_Golden.png" />
+		<Unit filename="Character.cpp" />
+		<Unit filename="Character.h" />
+		<Unit filename="TileMap.cpp" />
+		<Unit filename="TileMap.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="tiles.png" />
 		<Extensions>
