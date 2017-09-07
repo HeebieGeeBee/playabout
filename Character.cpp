@@ -1,6 +1,4 @@
 #include "Character.h"
-#define WORLD_WIDTH 2560
-#define WORLD_HIEGHT 1280
 
 Character::Character(sf::Vector2f pos, sf::Texture* texture, sf::Vector2u imageCount, float switchTime) :
     animation(texture, imageCount, switchTime)

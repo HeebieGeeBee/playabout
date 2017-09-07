@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include "Animation.h"
+#include "Globals.h"
 
 class Character
 {

@@ -44,6 +44,8 @@
 		<Unit filename="BODY_male_Epic_armors_Golden.png" />
 		<Unit filename="Character.cpp" />
 		<Unit filename="Character.h" />
+		<Unit filename="Globals.cpp" />
+		<Unit filename="Globals.h" />
 		<Unit filename="TileMap.cpp" />
 		<Unit filename="TileMap.h" />
 		<Unit filename="ViewSetting.h" />

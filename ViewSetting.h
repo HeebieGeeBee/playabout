@@ -1,3 +1,4 @@
+#include "Globals.h"
 
 sf::Vector2f ViewSetting(Character knight)
 {

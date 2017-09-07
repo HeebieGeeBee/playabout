@@ -1,9 +1,3 @@
-
-const int WINDOW_WIDTH = 1240;
-const int WINDOW_HIEGHT = 720;
-const int WORLD_WIDTH = 2560;
-const int WORLD_HIEGHT = 1280;
-
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <string>
@@ -12,7 +6,7 @@ const int WORLD_HIEGHT = 1280;
 #include "Animation.h"
 #include "Character.h"
 #include "ViewSetting.h"
-
+#include "Globals.h"
 
 
 
