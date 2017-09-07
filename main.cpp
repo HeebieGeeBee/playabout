@@ -1,3 +1,9 @@
+
+const int WINDOW_WIDTH = 1240;
+const int WINDOW_HIEGHT = 720;
+const int WORLD_WIDTH = 2560;
+const int WORLD_HIEGHT = 1280;
+
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <string>
@@ -5,11 +11,9 @@
 #include "TileMap.h"
 #include "Animation.h"
 #include "Character.h"
+#include "ViewSetting.h"
 
-#define WINDOW_WIDTH 1240
-#define WINDOW_HIEGHT 720
-#define WORLD_WIDTH 2560
-#define WORLD_HIEGHT 1280
+
 
 
 int main()
@@ -68,7 +72,8 @@ int main()
         // Update the knight
         knight.Update(deltaTime);
         // Set view center
-        view.setCenter(knight.GetPosition());
+
+        view.setCenter(ViewSetting(knight));
         // Clear screen
         app.clear();
         // Draw map
@@ -83,3 +88,5 @@ int main()
 
     return EXIT_SUCCESS;
 }
+
+

@@ -46,6 +46,7 @@
 		<Unit filename="Character.h" />
 		<Unit filename="TileMap.cpp" />
 		<Unit filename="TileMap.h" />
+		<Unit filename="ViewSetting.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="tiles.png" />
 		<Extensions>
