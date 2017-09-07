@@ -85,7 +85,6 @@ public:
     Character(sf::Vector2f pos, sf::Texture* texture, sf::Vector2u imageCount, float switchTime) :
         animation(texture, imageCount, switchTime)
     {
-        position = pos;
         sprite.setSize(sf::Vector2f(100.0f, 120.0f));
         sprite.setOrigin(sprite.getSize() / 2.0f );
         sprite.setPosition(pos);
@@ -99,31 +98,85 @@ public:
     }
     void Update(float deltaTime)
     {
+        // Setting up keyboard controls
         dir = {0.0f, 0.0f};
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sprite.getPosition().y - (sprite.getSize().y / 2) > 0)
+        // Up Left Diagonal
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) &&
+            sf::Keyboard::isKeyPressed(sf::Keyboard::Left) &&
+            sprite.getPosition().y - (sprite.getSize().y / 2) > 0 &&
+            sprite.getPosition().x - (sprite.getSize().x / 2) > 0)
+        {
+            dir.x -= speed * deltaTime;
+            dir.y -= speed * deltaTime;
+            facing = "LEFT";
+            moving = true;
+        }
+        // Up Right Diagonal
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) &&
+                 sf::Keyboard::isKeyPressed(sf::Keyboard::Right) &&
+                 sprite.getPosition().y - (sprite.getSize().y / 2) > 0 &&
+                 sprite.getPosition().x + (sprite.getSize().x / 2)  < WORLD_WIDTH)
+        {
+            dir.x += speed * deltaTime;
+            dir.y -= speed * deltaTime;
+            facing = "RIGHT";
+            moving = true;
+        }
+        // Down Left Diagonal
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) &&
+                 sf::Keyboard::isKeyPressed(sf::Keyboard::Left) &&
+                 sprite.getPosition().y + (sprite.getSize().y / 2) < WORLD_HIEGHT &&
+                 sprite.getPosition().x - (sprite.getSize().x / 2) > 0)
+        {
+            dir.x -= speed * deltaTime;
+            dir.y += speed * deltaTime;
+            facing = "LEFT";
+            moving = true;
+        }
+        // Down Right Diagonal
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) &&
+                 sf::Keyboard::isKeyPressed(sf::Keyboard::Right) &&
+                 sprite.getPosition().y + (sprite.getSize().y / 2) < WORLD_HIEGHT &&
+                 sprite.getPosition().x + (sprite.getSize().x / 2)  < WORLD_WIDTH)
+        {
+            dir.x += speed * deltaTime;
+            dir.y += speed * deltaTime;
+            facing = "RIGHT";
+            moving = true;
+        }
+        // Up
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) &&
+                 sprite.getPosition().y - (sprite.getSize().y / 2) > 0)
         {
             dir.y -= speed * deltaTime;
             facing = "UP";
             moving = true;
         }
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && sprite.getPosition().y + (sprite.getSize().y / 2) < WORLD_HIEGHT)
+        // Down
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) &&
+                 sprite.getPosition().y + (sprite.getSize().y / 2) < WORLD_HIEGHT)
         {
             dir.y += speed * deltaTime;
             facing = "DOWN";
             moving = true;
         }
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && sprite.getPosition().x - (sprite.getSize().x / 2) > 0)
+        // Left
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) &&
+                 sprite.getPosition().x - (sprite.getSize().x / 2) > 0)
         {
             dir.x -= speed * deltaTime;
             facing = "LEFT";
             moving = true;
         }
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && sprite.getPosition().x + (sprite.getSize().x / 2)  < WORLD_WIDTH)
+        // Right
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) &&
+                 sprite.getPosition().x + (sprite.getSize().x / 2)  < WORLD_WIDTH)
         {
             dir.x += speed * deltaTime;
             facing = "RIGHT";
             moving = true;
         }
+        // Not Moving
         else
         {
             moving = false;
@@ -144,10 +197,7 @@ public:
 private:
 
     static constexpr float speed = 100.f;
-    sf::Vector2f position;
-    sf::Vector2f velocity = {0.0f, 0.0f};
     sf::RectangleShape sprite;
-    sf::Vector2f textureSize;
     sf::Vector2f dir = {0.0f, 0.0f};
     std::string facing = "DOWN";
     Animation animation;
@@ -170,17 +220,14 @@ int main()
     // Create new Character knight
     sf::Texture knightTexture;
     knightTexture.loadFromFile( "BODY_male_Epic_armors_Golden.png");
-    knightTexture.setSmooth(true);
 
     sf::Texture backgroundTexture;
     backgroundTexture.loadFromFile( "free-wallpaper-33.jpg" );
     sf::RectangleShape background({WORLD_WIDTH, WORLD_HIEGHT});
     background.setTexture(&backgroundTexture);
-    Character knight({500.0f, 400.0f}, &knightTexture, {9, 4}, 0.1f);
 
-    sf::CircleShape triangle(30, 3);
-    triangle.setPosition(100.0f, 100.0f);
-    triangle.setOrigin(triangle.getRadius(), triangle.getRadius() );
+    Character knight({500.0f, 400.0f},  &knightTexture, {9, 4}, 0.1f);
+
 
     sf::View view({0,0}, sf::Vector2f(WINDOW_WIDTH,WINDOW_HIEGHT));
 
@@ -197,20 +244,15 @@ int main()
                 app.close();
         }
 
-        triangle.rotate(100.0f * deltaTime);
-
-
         // Update the knight
         knight.Update(deltaTime);
-        view.setCenter(knight.GetPosition().x - (knight.GetSize().x / 2) <= WINDOW_WIDTH/2 ? WINDOW_WIDTH/2 + (knight.GetSize().x / 2) : knight.GetPosition().x ||
-                       knight.GetPosition().x + (knight.GetSize().x / 2) >= WORLD_WIDTH - (WINDOW_WIDTH/2) ? WINDOW_WIDTH/2 - (knight.GetSize().x / 2) : knight.GetPosition().x , knight.GetPosition().y);
+        view.setCenter(knight.GetPosition());
         // Clear screen
         app.clear();
 
         // Draw the knight
         app.draw(background);
         knight.Draw(app);
-        app.draw(triangle);
         app.setView(view);
         // Update the window
         app.display();

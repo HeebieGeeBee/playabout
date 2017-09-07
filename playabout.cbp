@@ -39,7 +39,7 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="cb.bmp" />
+		<Unit filename="BODY_male_Epic_armors_Golden.png" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
