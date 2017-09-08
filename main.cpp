@@ -7,8 +7,7 @@
 #include "Character.h"
 #include "ViewSetting.h"
 #include "Globals.h"
-
-
+#include "Maps.h"
 
 int main()
 {
@@ -32,23 +31,13 @@ int main()
 
     sf::View view({0,0}, sf::Vector2f(WINDOW_WIDTH,WINDOW_HIEGHT));
 
-    const int level[] =
-    {
-        22, 15, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0,
-        1, 1, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3,
-        0, 1, 0, 0, 2, 0, 3, 3, 3, 0, 1, 1, 1, 0, 0, 0,
-        0, 1, 1, 0, 3, 3, 3, 0, 0, 0, 1, 1, 1, 2, 0, 0,
-        0, 0, 1, 0, 3, 0, 2, 2, 0, 0, 1, 1, 1, 1, 2, 0,
-        2, 0, 1, 0, 3, 0, 2, 2, 2, 0, 1, 1, 1, 1, 1, 1,
-        0, 0, 1, 0, 3, 2, 2, 2, 0, 0, 0, 0, 1, 1, 1, 1,
-    };
+
 
     TileMap map;
-    if (!map.load("tiles.png", sf::Vector2u(32, 32), level, 16, 8))
+    if (!map.load("tiles.png", sf::Vector2u(16, 16), world1, 100, 100))
         return -1;
 
-    map.scale(5,5);
+    map.scale(2,2);
 
 	// Start the game loop
     while (app.isOpen())
@@ -63,8 +52,13 @@ int main()
                 app.close();
         }
 
+
+
+
         // Update the knight
+
         knight.Update(deltaTime);
+        // Set view
         // Set view center
 
         view.setCenter(ViewSetting(knight));
@@ -74,8 +68,9 @@ int main()
         app.draw(map);
         // Draw knight
         knight.Draw(app);
-        // Set view
+
         app.setView(view);
+
         // Update the window
         app.display();
     }
